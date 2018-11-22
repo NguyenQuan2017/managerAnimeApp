@@ -1,0 +1,11 @@
+.preview-images-zone {
+  width: 100%;
+  border: 1px solid #ddd;
+  min-height: 180px;
+  max-height: 300px;
+  /* display: flex; */
+  padding: 5px 5px 0px 5px;
+  position: relative;
+  overflow:scroll;
+  margin-top: 20px;
+}

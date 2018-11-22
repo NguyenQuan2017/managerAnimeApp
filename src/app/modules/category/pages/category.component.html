@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Categories <a href="javascript:void(0)" class="pull-right fa fa-plus-circle" (click)="toggleAction()"></a></h4>
+    </div>
+    <div class="card-body">
+        <div class="toggle-action" [@toggleAction]= 'state'>
+            <div class="card">
+                <div class="card-header">
+                    Category
+                </div>
+                <div class="card-body">
+                    <form #categoryForm="ngForm" (ngSubmit)="isEdit === false ? createCategory(category) : updateCategory(category)">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="category.category_name" name="categoryName" placeholder="Enter category name">
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right">Save</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="pt-5">
+            <table class="table table-hover table-sm text-center">
+                <thead class="table-dark text-uppercase">
+                <tr>
+                    <th>stt</th>
+                    <th>category name</th>
+                    <th>slug</th>
+                    <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let category of categories, let i = index ">
+                    <td>{{i + 1}}</td>
+                    <td>{{category.category_name}}</td>
+                    <td>{{category.slug}}</td>
+                    <td>
+                        <a class="btn btn-action btn-danger" (click)="deleteCategory(category.category_id)">Delete</a>
+                        <a class="btn btn-action btn-info" (click)="showCategory(category.category_id)">Edit</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

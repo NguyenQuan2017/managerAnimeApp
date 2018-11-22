@@ -1,0 +1,21 @@
+
+<div class="change-file">
+  <h6 class="breadcrumb disabled"><span>Dashboard</span>&nbsp; <span class="fa fa-angle-right" aria-hidden="true"></span>&nbsp;<span>{{breadcrumb}}</span>&nbsp;<span class="fa fa-angle-right" aria-hidden="true"></span>&nbsp; <span>File</span></h6>
+</div>
+<div>
+  <input type="file"  class="form-control"   (change)=" upload($event)" multiple >
+  <div class="preview-images-zone  col-12" *ngIf="isUpload === true">
+    <div class="row">
+      <div *ngFor="let file of files" class="col-3">
+        <div class="image-zone"><img class="img-thumbnail" src="{{url + file.path}}"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-images-zone  col-12" *ngIf="isUpload === false " >
+    <div  class="col-3">
+      <div class="image-zone"><img class="img-thumbnail" src="{{url + file.path}}"></div>
+    </div>
+  </div>
+  <button type="button" (click)="updateAvatar()"  class="btn btn-primary pull-right btn-update">Update</button>
+</div>

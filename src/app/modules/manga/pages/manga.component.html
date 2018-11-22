@@ -1,0 +1,91 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Manga <a href="javascript:void(0)" class="pull-right fa fa-plus-circle" (click)="toggleAction()"></a></h4>
+  </div>
+  <div class="card-body">
+    <div class="toggle-action" [@toggleAction]= 'state'>
+      <div class="card">
+        <div class="card-header">
+          Manga
+        </div>
+        <div class="card-body">
+          <form  (ngSubmit)="isEdit ? updateManga(manga) : createManga(manga)">
+            <div class="form-group">
+              <label> Category</label>
+              <ng-multiselect-dropdown
+                  [placeholder]="'Please choice category'"
+                  [data]="categories"
+                  [(ngModel)]="manga.selectedCategory"
+                  [settings]="dropdownSettingsCategory"
+                  name="categortId"
+              ></ng-multiselect-dropdown>
+            </div>
+
+            <div class="form-group">
+              <label> Genre</label>
+              <ng-multiselect-dropdown
+                      [placeholder]="'Please choice genre'"
+                      [data]="genres"
+                      [(ngModel)]="manga.selectedGenre"
+                      [settings]="dropdownSettingsGenre"
+                      name="genreId"
+              ></ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+              <label>Manga Name</label>
+              <input type="text" class="form-control" [(ngModel)]="manga.manga_name" name="mangaName" placeholder="Enter Manga name">
+            </div>
+
+            <div class="form-group">
+              <label>Content</label>
+              <textarea type="text" class="form-control" [(ngModel)]="manga.content" name="content" placeholder="Enter content">
+              </textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Chapters</label>
+              <input type="text" class="form-control" [(ngModel)]="manga.episode" name="episode" placeholder="Enter chapter">
+            </div>
+
+            <div [hidden]="isEdit === true" class="form-group">
+              <label>Image</label>
+              <app-upload-form></app-upload-form>
+            </div>
+
+            <button type="submit" class="btn btn-primary pull-right">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="pt-5">
+      <table class="table table-hover table-sm text-center">
+        <thead class="table-dark text-uppercase">
+        <tr>
+          <th>stt</th>
+          <th>Image</th>
+          <th>Manga name</th>
+          <th>content</th>
+          <th>category</th>
+          <th>genre</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let manga of mangas, let i = index ">
+          <td>{{i + 1}}</td>
+          <td (click)="editMangaImage(manga.manga_id, manga.file.file_id)" ><img src="{{url + manga.file.path}}"  width="100" height="150" alt=""></td>
+          <td>{{manga.manga_name}}</td>
+          <td>{{manga.content}}</td>
+          <td><a class="btn btn-info m-1" *ngFor="let category of manga.categories">{{category.category_name}}</a></td>
+          <td><a class="btn btn-info m-1" *ngFor="let genre of manga.genres">{{genre.genre_name}}</a></td>
+          <td>
+            <a class="btn btn-action btn-danger" (click)="deleteManga(manga.manga_id)">Delete</a>
+            <a class="btn btn-action btn-info" (click)="showManga(manga.manga_id)">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

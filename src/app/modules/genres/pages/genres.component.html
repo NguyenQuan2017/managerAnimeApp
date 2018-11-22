@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Genres <a href="javascript:void(0)" class="pull-right fa fa-plus-circle" (click)="toggleAction()"></a></h4>
+  </div>
+  <div class="card-body">
+    <div class="toggle-action" [@toggleAction]= 'state'>
+      <div class="card">
+        <div class="card-header">
+          Genres
+        </div>
+        <div class="card-body">
+          <form #genreForm="ngForm" (ngSubmit)="isEdit ? updateGenres(genre) : createGenres(genre)">
+            <div class="form-group">
+              <label>Genre Name</label>
+              <input type="text" class="form-control" [(ngModel)]="genre.genre_name" name="genreName" placeholder="Enter Genre name">
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">Save</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    <div class="pt-5">
+      <table class="table table-hover table-sm text-center">
+        <thead class="table-dark text-uppercase">
+        <tr>
+          <th>stt</th>
+          <th>category name</th>
+          <th>slug</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let genre of genres, let i = index ">
+          <td>{{i + 1}}</td>
+          <td>{{genre.genre_name}}</td>
+          <td>{{genre.slug}}</td>
+          <td>
+            <a class="btn btn-action btn-danger" (click)="deleteGenre(genre.genre_id)">Delete</a>
+            <a class="btn btn-action btn-info" (click)="editGenre(genre.genre_id)">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

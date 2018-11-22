@@ -1,0 +1,18 @@
+.preview-images-zone {
+  width: 100%;
+  border: 1px solid #ddd;
+  min-height: 180px;
+  /* display: flex; */
+  padding: 5px 5px 0px 5px;
+  position: relative;
+  overflow:auto;
+  margin-top: 20px;
+}
+.btn-update {
+  margin-top: 20px;
+}
+.change-file h6 {
+  margin-top: 20px;
+  background-color: #32383e !important;
+  color: #ffffff;
+}

@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Users <a href="javascript:void(0)" class="pull-right fa fa-plus-circle" (click)="toggleAction()"></a></h4>
+  </div>
+  <div class="card-body">
+    <div class="toggle-action" [@toggleAction]= 'state'>
+      <div class="card">
+        <div class="card-header">
+          {{action}} user
+        </div>
+        <div class="card-body">
+          <form #userForm ="ngForm" (ngSubmit)="isEdit ? updateUser(user) : addUser(user)">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" [(ngModel)]="user.firstName" name="firstName" class="form-control" placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" [(ngModel)]="user.lastName" name="lastName" class="form-control" placeholder="Enter last name">
+            </div>
+            <div class="form-group">
+              <label>User name</label>
+              <input type="text" [(ngModel)]="user.userName" name="userName" class="form-control" placeholder="Enter user name">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="form-group" [hidden]="isEdit === true" >
+              <label>Avatar</label>
+              <app-upload-form></app-upload-form>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <button type="submit"  class="btn btn-primary pull-right">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="pt-5">
+      <table class="table table-hover table-sm">
+        <thead class="table-dark text-uppercase">
+        <tr>
+          <th></th>
+          <th>avatar</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>name</th>
+          <th>email</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users, let i = index">
+          <td>
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </td>
+          <td  (click)="editAvatar(user.user_id, user.file.file_id)" ><img src="{{url + user.file.path }}" width="50" height="50" alt="" data-toggle="modal"  data-target="#exampleModalCenter">
+           </td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <a href="javascript:void(0)" class="btn btn-action btn-danger" (click)="deleteUser(user.user_id)">Delete</a>
+            <a  class="btn btn-action btn-info" (click)="editUser(user.user_id)">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

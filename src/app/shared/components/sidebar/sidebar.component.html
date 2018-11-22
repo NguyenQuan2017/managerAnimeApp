@@ -1,0 +1,17 @@
+<ul class="list-group left-sidebar">
+    <li class="list-group-item active">Authenticate</li>
+    <li href="users.html" class="list-group-item" ><a  routerLink="users" href="javascript:void(0)" ><span class="fa fa-user" aria-hidden="true"></span> Users <span class="badge" *ngFor="let item of data">{{item.user}}</span></a></li>
+</ul>
+<ul class="list-group left-sidebar">
+    <li class="list-group-item active"><span class="fa fa-cog" aria-hidden="true"></span>
+        Dashboard <span class="badge">12</span>
+    </li>
+    <li class="list-group-item"><a routerLink="categories" href="javascript:void(0)" ><span class="fa fa-list-alt" aria-hidden="true"></span> Categories <span class="badge" *ngFor="let item of data">{{item.category}}</span></a></li>
+    <li class="list-group-item"><a routerLink="genres" href="javascript:void(0)" ><span class="fa fa-list-alt" aria-hidden="true"></span> Genres <span class="badge">25</span></a></li>
+    <li class="list-group-item"><a routerLink="manga" href="javascript:void(0)" ><span class="fa fa-list-alt" aria-hidden="true"></span> Manga <span class="badge">25</span></a></li>
+    <li class="list-group-item"><a routerLink="chapter" href="javascript:void(0)" ><span class="fa fa-list-alt" aria-hidden="true"></span> Chapter <span class="badge">25</span></a></li>
+</ul>
+<ul class="list-group left-sidebar">
+    <li class="list-group-item active"><span class="fa fa-cogs" aria-hidden="true"></span> Settings </li>
+    <li href="users.html" class="list-group-item"><span class="fa fa-user" aria-hidden="true"></span>Version</li>
+</ul>

@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Chapter <a href="javascript:void(0)" class="pull-right fa fa-plus-circle" (click)="toggleAction()"></a></h4>
+  </div>
+  <div class="card-body">
+    <div class="toggle-action" [@toggleAction]= 'state'>
+      <div class="card">
+        <div class="card-header">
+          Chapter
+        </div>
+        <div class="card-body">
+          <form #chapterForm="ngForm"  (ngSubmit)="isEdit ? updateChapter(chapter) : createChapter(chapter)">
+            <div class="form-group">
+              <label>Manga Name</label>
+              <ng-multiselect-dropdown
+                      [placeholder]="'Please choice Manga Name'"
+                      [data]="mangas"
+                      [(ngModel)]="chapter.selectedManga"
+                      [settings]="dropdownSettingsManga"
+                      name="mangaId"
+              ></ng-multiselect-dropdown>
+            </div>
+
+
+            <div class="form-group">
+              <label>Chapters</label>
+              <input type="text" class="form-control" [(ngModel)]="chapter.chapter" name="chapter" placeholder="Enter chapter">
+            </div>
+
+            <div [hidden]="isEdit === true" class="form-group">
+              <label>Image</label>
+              <app-upload-form></app-upload-form>
+            </div>
+
+            <button type="submit" class="btn btn-primary pull-right">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="pt-5">
+      <table class="table table-hover table-sm text-center">
+        <thead class="table-dark text-uppercase">
+        <tr>
+          <th>stt</th>
+          <th>Manga name</th>
+          <th>Chapter</th>
+          <th>Image</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let chapter of chapters |  paginate: { itemsPerPage: 5, currentPage: p }, let i = index  ">
+          <td>{{i + 1}}</td>
+          <td>{{chapter.manga.manga_name}}</td>
+          <td>{{chapter.chapter}}</td>
+          <td>
+              <div class="preview-images-zone  col-12" >
+                <div class="row">
+                  <div *ngFor="let file of chapter.files, let i = index" class="col-2">
+                    <div class="image-zone"><span>{{i + 1}}</span><img class="img-thumbnail" src="{{url + file.path}}"></div>
+                  </div>
+                </div>
+              </div>
+          </td>
+          <td>
+            <a class="btn btn-action btn-danger" (click)="deleteManga(manga.manga_id)">Delete</a>
+            <a class="btn btn-action btn-info" (click)="showManga(manga.manga_id)">Edit</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5"><pagination-controls (pageChange)="p = $event"></pagination-controls> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
